@@ -1,0 +1,21 @@
+/*多行文本溢出显示省略号*/
+.parignore{
+	text-overflow: -o-ellipsis-lastline;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	display: -webkit-box;
+  	-webkit-line-clamp: 2;
+  	line-clamp: 2;
+  	-webkit-box-orient: vertical;
+  	word-wrap:break-word;
+    word-break:break-all;
+}
+
+/*文本超出范围后自动换行*/
+.content {
+    width: 100%;
+    height: auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
+}
