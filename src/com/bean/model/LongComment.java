@@ -11,11 +11,13 @@ public class LongComment {
 
     private String longcommentsheading;
 
-    private String longcommentsdetails;
-
     private Date longcommentstime;
 
     private Integer longcommentslike;
+
+    private Integer moviescore;
+
+    private String longcommentsdetails;
 
     public String getLongcommentsid() {
         return longcommentsid;
@@ -49,14 +51,6 @@ public class LongComment {
         this.longcommentsheading = longcommentsheading == null ? null : longcommentsheading.trim();
     }
 
-    public String getLongcommentsdetails() {
-        return longcommentsdetails;
-    }
-
-    public void setLongcommentsdetails(String longcommentsdetails) {
-        this.longcommentsdetails = longcommentsdetails == null ? null : longcommentsdetails.trim();
-    }
-
     public Date getLongcommentstime() {
         return longcommentstime;
     }
@@ -71,5 +65,21 @@ public class LongComment {
 
     public void setLongcommentslike(Integer longcommentslike) {
         this.longcommentslike = longcommentslike;
+    }
+
+    public Integer getMoviescore() {
+        return moviescore;
+    }
+
+    public void setMoviescore(Integer moviescore) {
+        this.moviescore = moviescore;
+    }
+
+    public String getLongcommentsdetails() {
+        return longcommentsdetails;
+    }
+
+    public void setLongcommentsdetails(String longcommentsdetails) {
+        this.longcommentsdetails = longcommentsdetails == null ? null : longcommentsdetails.trim();
     }
 }

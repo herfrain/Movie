@@ -40,6 +40,11 @@
 		<!-- //js -->
 		<!---<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>--->
 		<!-- start-smoth-scrolling -->
+		
+		<!-- 评星 -->
+		<link href="<%=staticPath %>/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+		<script src="<%=staticPath %>/js/star-rating.js" type="text/javascript"></script>
+		
 		<script type="text/javascript" src="<%=staticPath %>/js/move-top.js"></script>
 		<script type="text/javascript" src="<%=staticPath %>/js/easing.js"></script>
 		<script type="text/javascript">
@@ -95,12 +100,14 @@
 				var movieid="<%=request.getParameter("movieid") %>";
 				var title=document.getElementById("title").value;
 				var detail=document.getElementById("detail").value;
+				var score=$('#score').val();
+				console.log(score);
 				console.log(movieid);
 				if(title==""||detail==""){
 					alert('标题或正文不能为空');
 					return ;
 				}
-				$.post("writeLongComment/write.do",{"movieid":movieid,"title":title,"detail":detail},function(result){
+				$.post("writeLongComment/write.do",{"movieid":movieid,"title":title,"detail":detail,"score":score},function(result){
 					console.log(result);
 					if(result=="true"){
 						window.location.href="/movie/longCommentList.do?movieid="+movieid;
@@ -131,7 +138,11 @@
     				<label for="detail">正文</label>
     				<textarea id="detail" class="form-control" rows="20"></textarea>
   				</div>
-  				<button style="float:right" type="submit" class="btn btn-default">提交</button>
+  				
+  				<div style="float:left">
+  					<input id="score" value="5" type="text">
+  					<button  type="submit" class="btn btn-default">提交</button>
+  				</div>
 			</form>
 		</div>
 
@@ -173,6 +184,16 @@
 				$().UItoTop({
 					easingType: 'easeOutQuart'
 				});
+				
+				$('#score').rating({
+	                'showCaption': false,
+	                'showClear':false,
+	                'min': '0',
+	                'max': '5',
+	                'step': '1',
+	                'size': 'xs',
+	                'starCaptions': {}
+	            });
 
 			});
 		</script>

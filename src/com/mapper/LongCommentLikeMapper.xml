@@ -10,6 +10,15 @@
   <sql id="Base_Column_List" >
     longcommentsLikeID, longcommentsID, userID, LClikeORnot
   </sql>
+  
+  <select id="exist" resultMap="BaseResultMap">
+  	select * from longcommentslike where longcommentsID=#{0} and userID=#{1}
+  </select>
+  
+  <select id="getLikeNum" resultType="java.lang.Integer">
+  	select count(*) from longcommentslike where longcommentsID=#{0} and LClikeORnot=1
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

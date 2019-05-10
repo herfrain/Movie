@@ -57,6 +57,35 @@
 		<!-- start-smoth-scrolling -->
 		
 		<script type="text/javascript">
+			//下拉自动加载
+			$(document).ready(function(){
+				var num=5;
+				var list=$("div[name='longcomment']");
+				//alert(list.length);
+				//初始化加载5个
+				for(var i=0;i<num&&i<list.length;i++){
+					list[i].style.display="block";
+				}
+				//$('#test').css('display','none');
+				
+				$(window).scroll(function(){//滚动事件
+				var docHeight=$(document).height();//获取整个页面的高度
+				var winHeight=$(window).height();//页面高度
+				var winScrollHeight=$(window).scrollTop();//获取滚动条的距离
+				//console.log(docHeight);
+				//console.log(winHeight);
+				//console.log(winScrollHeight);
+				if(docHeight-600<=winHeight+winScrollHeight&&num<list.length){
+					//下拉加载多三个
+					list[num++].style.display="block";
+					list[num++].style.display="block";
+					list[num++].style.display="block";
+				}
+				});
+			});
+			
+		
+			
 			//判断是否
 			function showWriteLongComment(){
 				console.log("showWriteLongComment");
@@ -123,11 +152,11 @@
 									</div>
 								</div>
 								<div id="myTabContent" class="tab-content">
-									<div role="tabpanel" class="tab-pane fade in active" id="home1" aria-labelledby="home1-tab">
+									<div role="tabpanel" class="tab-pane fade in active" id="longcommentlistParent" aria-labelledby="home1-tab">
 										
 										<c:forEach items="${userLongcommentList}" var="userLongcomment">
 										
-										<div class="wthree-news-top-left" style="width:99%; height:250px">
+										<div name="longcomment"  class="wthree-news-top-left" style="width:99%; height:250px; display:none;">
 											<div class="col-md-6 w3-agileits-news-left" style="width:99%;height:99%">
 												<div class="col-sm-7 wthree-news-info" style="width:99%;height:99%">
 													<a href="longCommentDetail.do?longcommentsid=${userLongcomment.longcommentsid}"><h5>${userLongcomment.longcommentsheading}</h5>
@@ -230,6 +259,7 @@
 					easingType: 'linear' 
 					};
 				*/
+				
 
 				$().UItoTop({
 					easingType: 'easeOutQuart'

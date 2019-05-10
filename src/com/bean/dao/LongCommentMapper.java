@@ -13,5 +13,7 @@ public interface LongCommentMapper {
 
     int updateByPrimaryKeySelective(LongComment record);
 
+    int updateByPrimaryKeyWithBLOBs(LongComment record);
+
     int updateByPrimaryKey(LongComment record);
 }

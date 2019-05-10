@@ -35,7 +35,11 @@ public class LongCommentServiceImpl implements LongCommentService{
 		// TODO Auto-generated method stub
 		return this.collectionsDao.selectByPrimaryKey(id);
 	}
-
+	
+	
+	public int updateByPrimaryKeySelective(LongComment record) {
+		return this.collectionsDao.updateByPrimaryKeySelective(record);
+	}
 
 
 }

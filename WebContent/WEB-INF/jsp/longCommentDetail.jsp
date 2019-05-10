@@ -56,7 +56,34 @@
 			});
 		</script>
 		<!-- start-smoth-scrolling -->
-
+		
+		
+		<script type="text/javascript">
+		//点赞
+		function like(){
+			console.log("like");
+			var longcommentid="<%=request.getParameter("longcommentsid") %>";
+			
+			console.log(longcommentid);
+			$.post("/movie/longCommentDetail/like.do",{"longcommentsid":longcommentid},function(result){
+				console.log(result);
+				if(result=="login"){
+					alert('请先登录再操作');
+				}else if(result=="add"){
+					var num=parseInt($("#likeNum").html())+1;
+					console.log($("#likeNum").html());
+					console.log(num);
+					$("#like").attr("class", "fa fa-heart");
+					$("#likeNum").html(num);
+				}else if(result=="delete"){
+					var num=parseInt($("#likeNum").html())-1;
+					console.log(num);
+					$("#like").attr("class", "fa fa-heart-o");
+					$("#likeNum").html(num);
+				}
+			});
+		}
+		</script>
 	</head>
 
 	<body>
@@ -92,7 +119,13 @@
 									<p>Posted By
 										<a href="#"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;${userLongcomment.username}</a> &nbsp;&nbsp; <i class="fa fa-calendar" aria-hidden="true"></i> 
 										&nbsp;<fmt:formatDate value="${userLongcomment.longcommentstime}" pattern="yyyy-MM-dd HH:mm:ss"/> &nbsp;&nbsp;
-										<a href="#"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp;${userLongcomment.longcommentslike}</a>
+										
+										<c:if test="${like}" var="flag">
+										<a href="javascript:like()"><i id="like" class="fa fa-heart" aria-hidden="true"></i>&nbsp;<span id="likeNum" value="${userLongcomment.longcommentslike}">${userLongcomment.longcommentslike}</span></a>
+										</c:if>
+										<c:if test="${not flag}">
+   										<a href="javascript:like()"><i id="like" class="fa fa-heart-o" aria-hidden="true"></i>&nbsp;<span id="likeNum" value="${userLongcomment.longcommentslike}">${userLongcomment.longcommentslike}</span></a>
+										</c:if>
 									</p>
 								</div>
 								<div id="fb-root"></div>
@@ -192,252 +225,7 @@
 					<div class="clearfix"> </div>
 				</div>
 			</div>
-			<div class="w3l-latest-movies-grids">
-				<h4 class="latest-text w3_latest_text">Latest Movies</h4>
-				<div class="container">
-					<!-- /latest-movies -->
-					<div class="browse-inner">
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="<%=staticPath %>/images/m7.jpg" title="album-name" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1">
-								<div class="w3l-movie-text">
-									<h6><a href="single.html">Light B/t Oceans</a></h6>
-								</div>
-								<div class="mid-2">
-
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-											</li>
-
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="<%=staticPath %>/images/m8.jpg" title="album-name" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1">
-								<div class="w3l-movie-text">
-									<h6><a href="single.html">The BFG</a></h6>
-								</div>
-								<div class="mid-2">
-
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-											</li>
-
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="<%=staticPath %>/images/m9.jpg" title="album-name" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1">
-								<div class="w3l-movie-text">
-									<h6><a href="single.html">Central Intelligence</a></h6>
-								</div>
-								<div class="mid-2">
-
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-											</li>
-
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="<%=staticPath %>/images/m10.jpg" title="album-name" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1">
-								<div class="w3l-movie-text">
-									<h6><a href="single.html">Don't Think Twice</a></h6>
-								</div>
-								<div class="mid-2">
-
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-											</li>
-
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="<%=staticPath %>/images/m11.jpg" title="album-name" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1">
-								<div class="w3l-movie-text">
-									<h6><a href="single.html">X-Men</a></h6>
-								</div>
-								<div class="mid-2">
-
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-											</li>
-
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-						<div class="col-md-2 w3l-movie-gride-agile">
-							<a href="single.html" class="hvr-shutter-out-horizontal"><img src="<%=staticPath %>/images/m12.jpg" title="album-name" alt=" " />
-								<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-							</a>
-							<div class="mid-1">
-								<div class="w3l-movie-text">
-									<h6><a href="single.html">Greater</a></h6>
-								</div>
-								<div class="mid-2">
-
-									<p>2016</p>
-									<div class="block-stars">
-										<ul class="w3l-ratings">
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
-											</li>
-											<li>
-												<a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-											</li>
-
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-
-							</div>
-							<div class="ribben">
-								<p>NEW</p>
-							</div>
-						</div>
-
-						<div class="clearfix"> </div>
-					</div>
-					<!-- //latest-movies -->
-
-				</div>
-			</div>
+			
 		</div>
 		<!-- //faq-banner -->
 		

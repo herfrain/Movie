@@ -10,32 +10,39 @@ import com.bean.service.LongCommentLikeService;
 @Service
 public class LongCommentLikeServiceImpl implements LongCommentLikeService{
 	@Autowired
-	private LongCommentLikeMapper collectionsDao;
+	private LongCommentLikeMapper longCommentLikeMapper;
 
 	@Override
 	public int insert(LongCommentLike record) {
 		// TODO Auto-generated method stub
-		return this.collectionsDao.insert(record);
+		return this.longCommentLikeMapper.insert(record);
 	}
 	
 	@Override
 	public int deleteByPrimaryKey(String id) {
 		// TODO Auto-generated method stub
-		return this.collectionsDao.deleteByPrimaryKey(id);
+		return this.longCommentLikeMapper.deleteByPrimaryKey(id);
 	}
 	
 	@Override
 	public int updateByPrimaryKey(LongCommentLike record) {
 		// TODO Auto-generated method stub
-		return this.collectionsDao.updateByPrimaryKey(record);
+		return this.longCommentLikeMapper.updateByPrimaryKey(record);
 	}
 
 	@Override
 	public LongCommentLike selectByPrimaryKey(String id) {
 		// TODO Auto-generated method stub
-		return this.collectionsDao.selectByPrimaryKey(id);
+		return this.longCommentLikeMapper.selectByPrimaryKey(id);
 	}
 
 
-
+	public LongCommentLike exist(String longcommentsid,String userid) {
+		return this.longCommentLikeMapper.exist(longcommentsid, userid);
+	}
+	
+	//获取点赞数
+    public int getLikeNum(String longcommentid) {
+    	return this.longCommentLikeMapper.getLikeNum(longcommentid);
+    }
 }

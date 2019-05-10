@@ -14,4 +14,10 @@ public interface LongCommentLikeMapper {
     int updateByPrimaryKeySelective(LongCommentLike record);
 
     int updateByPrimaryKey(LongCommentLike record);
+    
+    //查找是否存在，存在则返回实例
+    LongCommentLike exist(String longcommentslikeid,String userid);
+    
+    //获取点赞数
+    int getLikeNum(String longcommentid);
 }
